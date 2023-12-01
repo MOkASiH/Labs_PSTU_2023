@@ -7,10 +7,9 @@ int main() {
 	setlocale(LC_ALL, "RU");
 
 	float n, s, a;
-	int o;
 
 	bool flag = false;
-	cout << "ââåäèèòå ÷èñëî: ";
+	cout << "Ã¢Ã¢Ã¥Ã¤Ã¨Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã®: ";
 	cin >> n >> s;
 	for (int i = 1; i <= n; i++) {
 
@@ -24,10 +23,10 @@ int main() {
 	}
 
 	if (flag == true) {
-		cout << "ñîäåðæèò";
+		cout << "Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã¨Ã²";
 	}
 	else {
-		cout << "íå ñîäåðæèò";
+		cout << "Ã­Ã¥ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã¨Ã²";
 	}
 
 	return 0;
