@@ -17,6 +17,7 @@ int main() {
 
 		if (i == 1) {
 			max = a;
+			s += 1;
 		}
 		if (a > max) {
 			max = a;
