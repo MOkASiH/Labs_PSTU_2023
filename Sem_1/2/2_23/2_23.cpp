@@ -6,7 +6,7 @@ using namespace std;
 int main() {
 	setlocale(LC_ALL, "RU");
 
-	int s = 0;
+	int s = 1;
 	float max, a, n;
 
 	cin >> n;
@@ -17,11 +17,10 @@ int main() {
 
 		if (i == 1) {
 			max = a;
-			s += 1;
 		}
 		if (a > max) {
 			max = a;
-			s = 0;
+			s = 1;
 		}
 		if (max == a) {
 			s += 1;
