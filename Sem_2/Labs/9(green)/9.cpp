@@ -20,7 +20,6 @@ int main() {
         string words;
         stringstream ss;
         int c = 0, p = 0;
-        ss << line;
         bool flag = false;
 
         for (int i = line.length(); i > 0; i--) {
@@ -29,14 +28,9 @@ int main() {
                 punct[i] = i;
             }
         }
-
+        ss << line;
 
         while (ss >> words) {
-            for (int i = words.length(); i > 0; i--) {
-                if (words[i] == '?' or words[i] == ',' or words[i] == '.' or words[i] == '!') {
-                    words[i] = ' ';
-                }
-            }
             for (int i = 0; (i = line.find(words, i)) != line.npos; i++) {
                 c++;
                 if (c > 1) {
@@ -76,7 +70,7 @@ int main() {
     ifstream file4("C:\\Users\\MOkASiH\\Desktop\\Infa\\F2.txt");
     string line3;
 
-    char vowel[20] = { 'à','î','ó','û','ı','å', '¸','è','ş','ÿ', 'À','Î','Ó','Û','İ','Å', '¨','È','Ş','ß' };
+    char vowel[20] = { 'Ã ','Ã®','Ã³','Ã»','Ã½','Ã¥', 'Â¸','Ã¨','Ã¾','Ã¿', 'Ã€','Ã','Ã“','Ã›','Ã','Ã…', 'Â¨','Ãˆ','Ã','ÃŸ' };
     int v = 0;
 
     while (getline(file4, line3)) {
