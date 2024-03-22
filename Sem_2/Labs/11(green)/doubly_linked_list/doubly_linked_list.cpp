@@ -1,202 +1,211 @@
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<string>
 #include<fstream>
+
 using namespace std;
 
-struct node {
-    char data;
-    node* next = nullptr;
-    node* prev = nullptr;
+system("chcp 1251>null");
 
+struct StackElem {
+    char data = 0;
+    StackElem* downer = nullptr;
 };
+struct Stack
+{
+    StackElem* top = nullptr;
+    int size = 0;
+    void push(char data) {
+        StackElem* newElem = new StackElem;
+        newElem->data = data;
+        newElem->downer = top;
+        top = newElem;
+        size++;
+    }
+    char pop() {
+        if (size == 0) {
+            cout << "Ð¡Ñ‚ÐµÐº Ð¿ÑƒÑÑ‚, Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ Ð½ÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾" << endl;
+            return NULL;
+        }
+        char value = top->data;
+        StackElem* tmp = top;
+        top = top->downer;
+        size--;
+        delete tmp;
+        return value;
+    }
+}s;
 
-struct list {
-    node* head = nullptr;
-    node* tail = nullptr;
-}n;
 
-void push(list& list, char& data, int index) {
-    node* new_node = new node;
-    new_node->data = data;
-    if (list.head == nullptr) {
-        list.head = new_node;
-        list.tail = new_node;
+void print(Stack& s) {
+    if (s.size == 0) {
+        cout << "Ð¡Ñ‚ÐµÐº Ð¿ÑƒÑÑ‚." << endl;
         return;
     }
-    node* cur_node = list.head;
-    int c = 0;
-    while (c != index - 1) {
-        cur_node = cur_node->next;
-        c++;
+    Stack tmp;
+    char datatmp, sized = s.size;
+    for (int i = 0; i < sized; i++) {
+        datatmp = s.pop();
+        tmp.push(datatmp);
     }
-    if (cur_node->next != nullptr) {
-        cur_node = cur_node->prev;
+    for (int i = 0; i < sized; i++) {
+        datatmp = tmp.pop();
+        s.push(datatmp);
+        cout << datatmp;
     }
-
-    new_node->prev = cur_node;
-
-    if (cur_node->next != nullptr) {
-        new_node->next = cur_node->next;
-        cur_node->next->prev = new_node;
-    }
-    cur_node->next = new_node;
-    list.tail = new_node;
 }
 
-
-void print(list& list) {
-    node* cur_node = list.head;
-
-    while (cur_node != nullptr) {
-        cout << cur_node->data << ' ';
-        cur_node = cur_node->next;
+void add(Stack& s, char data, int n) {
+    Stack tmp;
+    char datatmp;
+    int sized = s.size;
+    for (int i = 0; i <= sized - n; i++) {
+        datatmp = s.pop();
+        tmp.push(datatmp);
     }
-    cout << endl;
+    s.push(data);
+    for (int i = 0; i <= sized - n; i++) {
+        datatmp = tmp.pop();
+        s.push(datatmp);
+    }
 }
 
-void del(list& list, int d) {
-    if (list.head == nullptr) {
-        return;
+void del(Stack& s, int n) {
+    Stack tmp;
+    char datatmp;
+    int sized = s.size;
+    for (int i = 0; i < sized - n; i++) {
+        datatmp = s.pop();
+        tmp.push(datatmp);
     }
-    node* cur_node = list.head;
-    if (d == 1) {
-        node* remove = list.head;
-        list.head->next->next->prev = list.head;
-        list.head = list.head->next;
-
-        delete remove;
-        return;
+    s.pop();
+    for (int i = 0; i < sized - n; i++) {
+        datatmp = tmp.pop();
+        s.push(datatmp);
     }
-
-    node* pre_node = nullptr;
-
-    for (int i = 0; i < d - 1; i++) {
-        cur_node = cur_node->next;
-    }
-
-    cur_node->prev->next = cur_node->next;
-    cur_node->next->prev = cur_node->prev;
-
-    node* remove = cur_node;
-
-    delete remove;
 }
 
-bool search(list& list, int ad) {
-    node* cur_node = list.head;
+bool search(Stack& s, char da) {
+    Stack tmp;
+    char datatmp;
     bool flag = false;
-
-    while (cur_node != nullptr) {
-        if (cur_node->data == ad) {
+    int size = s.size;
+    for (int i = 0; i < size; i++) {
+        datatmp = s.pop();
+        tmp.push(datatmp);
+    }
+    for (int i = 0; i < size; i++) {
+        datatmp = tmp.pop();
+        s.push(datatmp);
+        if (datatmp == da) {
             flag = true;
         }
-        cur_node = cur_node->next;
-
     }
     return flag;
-
 }
 
-void saver(list& list) {
+void saver(Stack& s) {
     ofstream file1("C:\\Users\\MOkASiH\\Desktop\\sem_2\\11\\save.txt");
     if (file1) {
-        node* cur_node = list.head;
-        while (cur_node != nullptr) {
-            file1 << cur_node->data;
-            cur_node = cur_node->next;
+        Stack tmp;
+        char datatmp;
+        int size = s.size;
+        for (int i = 0; i < size; i++) {
+            datatmp = s.pop();
+            tmp.push(datatmp);
+        }
+        for (int i = 0; i < size; i++) {
+            datatmp = tmp.pop();
+            s.push(datatmp);
+            file1 << datatmp;
         }
     }
+
     else {
-        cout << "Ôàéë íå îòêðûëñÿ";
-    }
-
-}
-
-void killer(list& list) {
-    node* cur_node = list.head;
-    if (list.head == nullptr) {
-        return;
-    }
-    while (cur_node != nullptr) {
-        node* remove = cur_node;
-        list.head = cur_node->next;
-        cur_node = cur_node->next;
-        delete remove;
-    }
-}
-
-void load(list& list) {
-    ifstream file1("C:\\Users\\MOkASiH\\Desktop\\sem_2\\11\\save.txt");
-    string f;
-    cin.ignore();
-
-    if (file1) {
-        getline(file1, f);
-        for (int i = 0; i < f.length(); ++i) {
-            push(n, f[i], i);
-        }
-    }
-    else {
-        cout << "Ôàéë íå îòêðûëñÿ";
+        cout << "Ð¤Ð°Ð¹Ð» Ð½Ðµ Ð¾Ñ‚ÐºÑ€Ñ‹Ð»ÑÑ";
     }
     file1.close();
 }
 
+void killer(Stack& s) {
+    int size = s.size;
+    for (int i = 0; i < size; i++) {
+        s.pop();
+    }
+}
+
+void load(Stack& s) {
+    ifstream file1("C:\\Users\\MOkASiH\\Desktop\\sem_2\\11\\save.txt");
+    if (file1) {
+        cin.ignore();
+        string f;
+        getline(file1, f);
+        for (int i = 0; i < f.length(); i++) {
+            s.push(f[i]);
+        }
+        file1.close();
+    }
+    else {
+        cout << "Ð¤Ð°Ð¹Ð» Ð½Ðµ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚";
+    }
+}
+
+
+
+
 int main() {
-    setlocale(LC_ALL, "RU");
-
-    string f;
+    int p, d;
     char ad;
+    string f;
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ‹ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¼Ð¸ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð·Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ ÑÑ‚ÐµÐº\n";
     getline(cin, f);
-    int d;
-    int p;
-
-    for (int i = 0; i < f.length(); ++i) {
-        push(n, f[i], i);
+    for (int i = 0; i < f.length(); i++)
+    {
+        s.push(f[i]);
     }
 
+    cout << "Ð¡Ñ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ ÑÑ‚ÐµÐº\n";
+    print(s);
 
-    cout << "Ñôîðìèðîâàííàÿ ñòðóêòóðà:\n";
-    print(n);
-
-    cout << "Ââåäèòå êîëè÷åñòâî ýëåìåíòîâ êîòîðûå õîòèòå äîáàâèòü\n";
+    cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ\n";
     cin >> d;
-    cout << "Ââåäèòå ïîçèöèþ íà êîòîðóþ õîòèòå äîáàâèòü ýëåìåíòû\n";
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸ÑŽ Ð½Ð° ÐºÐ¾Ñ‚Ð¾Ñ€ÑƒÑŽ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹\n";
     cin >> p;
-    cout << "Ââåäèòå ýëåìåíòû êîòîðûå õîòèòå äîáàâèòü\n";
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ\n";
     cin.ignore();
     getline(cin, f);
     for (int i = 0; i < d; i++) {
-        push(n, f[i], p + i);
+        add(s, f[i], p + i);
     }
-    print(n);
+    print(s);
 
-
-    cout << "Ââåäèòå êîëè÷åñòâî ýëåìåíòîâ êîòîðûå õîòèòå óäàëèòü\n";
+    cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ\n";
     cin >> d;
-    cout << "Ââåäèòå ïîçèöèþ ñ êîòîðîé õîòèòå óäàëèòü ýëåìåíòû\n";
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸ÑŽ Ñ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹\n";
     cin >> p;
     for (int i = 0; i < d; i++) {
-        del(n, p);
+        del(s, p);
     }
-    print(n);
+    print(s);
 
-    cout << "Ââåäèòå ýëåìåíò, ïîèñê, êîòîðîãî íåîáõîäèìî âûïîëíèòü\n";
+
+    cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚, Ð¿Ð¾Ð¸ÑÐº, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð²Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ\n";
     cin >> ad;
-    if (search(n, ad) == 1) {
-        cout << "Äàííûé ýëåìåíò åñòü â ñòðóêòóðå\n";
+    if (search(s, ad) == 1) {
+        cout << "Ð”Ð°Ð½Ð½Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ ÐµÑÑ‚ÑŒ Ð² ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ðµ\n";
     }
     else {
-        cout << "Äàííîãî ýëåìåíòà íåò â ñòðóêòóðå\n";
+        cout << "Ð”Ð°Ð½Ð½Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð½ÐµÑ‚ Ð² ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ðµ\n";
     }
 
-    saver(n);
-    cout << "Ñòðóêòóðà ñîõðàíåíà â ôàéë\n";
-    killer(n);
-    cout << "Còðóêòóðà óäàëåíà\n";
-    print(n);
+    saver(s);
+    cout << "Ð¡Ñ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð° Ð² Ñ„Ð°Ð¹Ð»\n";
+    killer(s);
+    cout << "CÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð°\n";
+    print(s);
 
-    load(n);
-    cout << "Ñòðóêòóðà çàãðóæåíà èç ôàéëà\n";
-    print(n);
+    load(s);
+    cout << "Ð¡Ñ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð° Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð°\n";
+    print(s);
+
+    return 0;
 }
