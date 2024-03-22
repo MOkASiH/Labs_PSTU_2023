@@ -4,8 +4,6 @@
 
 using namespace std;
 
-system("chcp 1251>null");
-
 struct StackElem {
     char data = 0;
     StackElem* downer = nullptr;
@@ -153,6 +151,7 @@ void load(Stack& s) {
 
 
 int main() {
+    system("chcp 1251>null");
     int p, d;
     char ad;
     string f;
