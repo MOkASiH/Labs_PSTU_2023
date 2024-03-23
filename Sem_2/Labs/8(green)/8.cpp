@@ -5,43 +5,43 @@
 using namespace std;
 ofstream f1("E:\\lab\\F.txt");
 
-struct goverment {
+struct state {
 	string name;
 	string language;
 	string state_currency;
 	double currency_rate;
 
 
-}state[193];
+}gov[193];
 
 
 int form() {
 	int c;
 	if (f1) {
-		cout << "Ââåäèòå êîëè÷åñòâî ýëåìåíòîâ: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð²: ";
 		cin >> c;
 		cout << endl;
 		for (int i = 0; i < c; i++) {
 
-			f1 << "State " << i + 1 << ": " << endl;
-			cout << "Ââåäèòå íàçâàíèå " << i + 1 << " ãîñóäàðñòâà" << endl;
-			cin >> state[i].name;
-			f1 << "Name: " << '\t' << '\t' << state[i].name << endl;
+			f1 << "Goverment " << i + 1 << ": " << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ " << i + 1 << " Ð³Ð¾ÑÑƒÐ´Ð°Ñ€ÑÑ‚Ð²Ð°" << endl;
+			cin >> gov[i].name;
+			f1 << "Name: " << '\t' << '\t' << gov[i].name << endl;
 			cout << endl;
 
-			cout << "Ââåäèòå ÿçûê ýòîãî ãîñóäðàòñâà" << endl;
-			cin >> state[i].language;
-			f1 << "Language: " << '\t' << state[i].language << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ·Ñ‹Ðº ÑÑ‚Ð¾Ð³Ð¾ Ð³Ð¾ÑÑƒÐ´Ñ€Ð°Ñ‚ÑÐ²Ð°" << endl;
+			cin >> gov[i].language;
+			f1 << "Language: " << '\t' << gov[i].language << endl;
 			cout << endl;
 
-			cout << "Ââåäèòå âàëþòó ýòîãî ãîñóäàðñòâà" << endl;
-			cin >> state[i].state_currency;
-			f1 << "State currency:" << '\t' << state[i].state_currency << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð°Ð»ÑŽÑ‚Ñƒ ÑÑ‚Ð¾Ð³Ð¾ Ð³Ð¾ÑÑƒÐ´Ð°Ñ€ÑÑ‚Ð²Ð°" << endl;
+			cin >> gov[i].state_currency;
+			f1 << "State currency:" << '\t' << gov[i].state_currency << endl;
 			cout << endl;
 
-			cout << "Ââåäèòå êóðñ ýòîé âàëþòû îòíîñèòåëüíî $" << endl;
-			cin >> state[i].currency_rate;
-			f1 << "Currency rate:" << '\t' << state[i].currency_rate << endl << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÑƒÑ€Ñ ÑÑ‚Ð¾Ð¹ Ð²Ð°Ð»ÑŽÑ‚Ñ‹ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ $" << endl;
+			cin >> gov[i].currency_rate;
+			f1 << "Currency rate:" << '\t' << gov[i].currency_rate << endl << endl;
 			cout << endl;
 
 			cout << "====================================================" << endl;
@@ -49,7 +49,7 @@ int form() {
 
 	}
 	else {
-		cout << "Ôàéë íå îòêðûëñÿ";
+		cout << "Ð¤Ð°Ð¹Ð» Ð½Ðµ Ð¾Ñ‚ÐºÑ€Ñ‹Ð»ÑÑ";
 	}
 
 	return c;
@@ -59,23 +59,23 @@ int form() {
 void print(int c) {
 	for (int i = 0; i < c; i++) {
 
-		cout << "State " << i + 1 << ": " << endl;
+		cout << "Goverment " << i + 1 << ": " << endl;
 		cout << endl;
 
-		cout << "Name: " << '\t' << '\t' << state[i].name << endl;
-		cout << endl;
-
-
-
-		cout << "Language: " << '\t' << state[i].language << endl;
+		cout << "Name: " << '\t' << '\t' << gov[i].name << endl;
 		cout << endl;
 
 
-		cout << "State currency:" << '\t' << state[i].state_currency << endl;
+
+		cout << "Language: " << '\t' << gov[i].language << endl;
 		cout << endl;
 
 
-		cout << "Currency rate:" << '\t' << state[i].currency_rate << endl << endl;
+		cout << "State currency:" << '\t' << gov[i].state_currency << endl;
+		cout << endl;
+
+
+		cout << "Currency rate:" << '\t' << gov[i].currency_rate << endl << endl;
 		cout << endl;
 
 	}
@@ -87,30 +87,30 @@ int add(int n) {
 	int c;
 	cout << endl;
 
-	cout << "Ââåäèòå êîëè÷åñòâî ýëåìåíòîâ, êîòîðûå õîòèòå äîáàâèòü: " << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð², ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ: " << endl;
 	cin >> c;
 	cout << endl;
 	for (int i = n; i < c + n; i++) {
 
-		f1 << "State " << i + 1 << ": " << endl;
-		cout << "Ââåäèòå íàçâàíèå " << i + 1 << " ãîñóäàðñòâà" << endl;
-		cin >> state[i].name;
-		f1 << "Name: " << '\t' << '\t' << state[i].name << endl;
+		f1 << "Goverment " << i + 1 << ": " << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ " << i + 1 << " Ð³Ð¾ÑÑƒÐ´Ð°Ñ€ÑÑ‚Ð²Ð°" << endl;
+		cin >> gov[i].name;
+		f1 << "Name: " << '\t' << '\t' << gov[i].name << endl;
 		cout << endl;
 
-		cout << "Ââåäèòå ÿçûê ýòîãî ãîñóäðàòñâà" << endl;
-		cin >> state[i].language;
-		f1 << "Language: " << '\t' << state[i].language << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ·Ñ‹Ðº ÑÑ‚Ð¾Ð³Ð¾ Ð³Ð¾ÑÑƒÐ´Ñ€Ð°Ñ‚ÑÐ²Ð°" << endl;
+		cin >> gov[i].language;
+		f1 << "Language: " << '\t' << gov[i].language << endl;
 		cout << endl;
 
-		cout << "Ââåäèòå âàëþòó ýòîãî ãîñóäàðñòâà" << endl;	
-		cin >> state[i].state_currency;
-		f1 << "State currency:" << '\t' << state[i].state_currency << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð°Ð»ÑŽÑ‚Ñƒ ÑÑ‚Ð¾Ð³Ð¾ Ð³Ð¾ÑÑƒÐ´Ð°Ñ€ÑÑ‚Ð²Ð°" << endl;
+		cin >> gov[i].state_currency;
+		f1 << "State currency:" << '\t' << gov[i].state_currency << endl;
 		cout << endl;
 
-		cout << "Ââåäèòå êóðñ ýòîé âàëþòû îòíîñèòåëüíî $" << endl;
-		cin >> state[i].currency_rate;
-		f1 << "Currency rate:" << '\t' << state[i].currency_rate << endl << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÑƒÑ€Ñ ÑÑ‚Ð¾Ð¹ Ð²Ð°Ð»ÑŽÑ‚Ñ‹ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ $" << endl;
+		cin >> gov[i].currency_rate;
+		f1 << "Currency rate:" << '\t' << gov[i].currency_rate << endl << endl;
 		cout << endl;
 
 		cout << "====================================================" << endl;
@@ -132,16 +132,16 @@ int del(int n) {
 
 	if (f3) {
 
-		cout << "Ââåäèòå íàçâàíèå ãîñóäàðñòâà, êîòîðîå õîòèòå óäàëèòü: " << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð³Ð¾ÑÑƒÐ´Ð°Ñ€ÑÑ‚Ð²Ð°, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ðµ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ: " << endl;
 
 		cin >> na;
 
 		cout << endl;
 
 		for (int i = 0; i < n; i++) {
-			if (state[i].name == na) {
+			if (gov[i].name == na) {
 				for (int j = i; j < n; j++) {
-					state[j] = state[j + 1];
+					gov[j] = gov[j + 1];
 				}
 				n--;
 			}
@@ -149,20 +149,20 @@ int del(int n) {
 
 
 		for (int i = 0; i < n; i++) {
-			f3 << "State " << i + 1 << ": " << endl;
+			f3 << "Goverment " << i + 1 << ": " << endl;
 
-			f3 << "Name: " << '\t' << '\t' << state[i].name << endl;
+			f3 << "Name: " << '\t' << '\t' << gov[i].name << endl;
 
-			f3 << "Language: " << '\t' << state[i].language << endl;
+			f3 << "Language: " << '\t' << gov[i].language << endl;
 
-			f3 << "State currency:" << '\t' << state[i].state_currency << endl;
+			f3 << "State currency:" << '\t' << gov[i].state_currency << endl;
 
-			f3 << "Currency rate:" << '\t' << state[i].currency_rate << endl << endl;
+			f3 << "Currency rate:" << '\t' << gov[i].currency_rate << endl << endl;
 
 		}
 	}
 	else {
-		cout << "ôàéë íå îòêðûëñÿ";
+		cout << "Ñ„Ð°Ð¹Ð» Ð½Ðµ Ð¾Ñ‚ÐºÑ€Ñ‹Ð»ÑÑ";
 	}
 
 	f3.close();
@@ -181,25 +181,25 @@ int main() {
 	n = form();
 	print(n);
 
-	cout << "Õîòèòå ëè âû äîáàâèòü åùå ýëåìåíò? (1 - äà, 0 - íåò)" << endl;
+	cout << "Ð¥Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð»Ð¸ Ð²Ñ‹ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐµÑ‰Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚? (1 - Ð´Ð°, 0 - Ð½ÐµÑ‚)" << endl;
 	cin >> a;
 
 	while (a == 1) {
 		n = add(n);
 		print(n);
 
-		cout << "Õîòèòå ëè âû äîáàâèòü åùå ýëåìåíò? (1 - äà, 0 - íåò)" << endl;
+		cout << "Ð¥Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð»Ð¸ Ð²Ñ‹ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐµÑ‰Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚? (1 - Ð´Ð°, 0 - Ð½ÐµÑ‚)" << endl;
 		cin >> a;
 	}
 
-	cout << endl << "Õîòèòå ëè âû óäàëèòü ýëåìåò (1 - äà, 0 - íåò)" << endl;
+	cout << endl << "Ð¥Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð»Ð¸ Ð²Ñ‹ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÑ‚ (1 - Ð´Ð°, 0 - Ð½ÐµÑ‚)" << endl;
 	cin >> d;
 
 	while (d == 1) {
 		n = del(n);
 		print(n);
 
-		cout << "Õîòèòå ëè âû óäàëèòü åù¸ ýëåìåíò (1 - äà, 0 - íåò)" << endl;
+		cout << "Ð¥Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð»Ð¸ Ð²Ñ‹ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ ÐµÑ‰Ñ‘ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ (1 - Ð´Ð°, 0 - Ð½ÐµÑ‚)" << endl;
 		cin >> d;
 	}
 
