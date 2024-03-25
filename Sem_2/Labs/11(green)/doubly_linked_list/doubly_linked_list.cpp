@@ -1,171 +1,165 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 #include<fstream>
-
 using namespace std;
 
-struct StackElem {
-    char data = 0;
-    StackElem* downer = nullptr;
+struct node {
+    char data;
+    node* next = nullptr;
+    node* prev = nullptr;
+
 };
-struct Stack
-{
-    StackElem* top = nullptr;
-    int size = 0;
-    void push(char data) {
-        StackElem* newElem = new StackElem;
-        newElem->data = data;
-        newElem->downer = top;
-        top = newElem;
-        size++;
-    }
-    char pop() {
-        if (size == 0) {
-            cout << "Стек пуст, действие невозможно" << endl;
-            return NULL;
-        }
-        char value = top->data;
-        StackElem* tmp = top;
-        top = top->downer;
-        size--;
-        delete tmp;
-        return value;
-    }
-}s;
 
+struct list {
+    node* head = nullptr;
+    node* tail = nullptr;
+}n;
 
-void print(Stack& s) {
-    if (s.size == 0) {
-        cout << "Стек пуст." << endl;
+void push(list& list, char& data, int index) {
+    node* new_node = new node;
+    new_node->data = data;
+    if (list.head == nullptr) {
+        list.head = new_node;
+        list.tail = new_node;
         return;
     }
-    Stack tmp;
-    char datatmp, sized = s.size;
-    for (int i = 0; i < sized; i++) {
-        datatmp = s.pop();
-        tmp.push(datatmp);
+    node* cur_node = list.head;
+    int c = 0;
+    while (c != index - 1) {
+        cur_node = cur_node->next;
+        c++;
     }
-    for (int i = 0; i < sized; i++) {
-        datatmp = tmp.pop();
-        s.push(datatmp);
-        cout << datatmp;
+    if (cur_node->next != nullptr) {
+        cur_node = cur_node->prev;
     }
+
+    new_node->prev = cur_node;
+
+    if (cur_node->next != nullptr) {
+        new_node->next = cur_node->next;
+        cur_node->next->prev = new_node;
+    }
+    cur_node->next = new_node;
+    list.tail = new_node;
 }
 
-void add(Stack& s, char data, int n) {
-    Stack tmp;
-    char datatmp;
-    int sized = s.size;
-    for (int i = 0; i <= sized - n; i++) {
-        datatmp = s.pop();
-        tmp.push(datatmp);
+
+void print(list& list) {
+    node* cur_node = list.head;
+
+    while (cur_node != nullptr) {
+        cout << cur_node->data << ' ';
+        cur_node = cur_node->next;
     }
-    s.push(data);
-    for (int i = 0; i <= sized - n; i++) {
-        datatmp = tmp.pop();
-        s.push(datatmp);
-    }
+    cout << endl;
 }
 
-void del(Stack& s, int n) {
-    Stack tmp;
-    char datatmp;
-    int sized = s.size;
-    for (int i = 0; i < sized - n; i++) {
-        datatmp = s.pop();
-        tmp.push(datatmp);
+void del(list& list, int d) {
+    if (list.head == nullptr) {
+        return;
     }
-    s.pop();
-    for (int i = 0; i < sized - n; i++) {
-        datatmp = tmp.pop();
-        s.push(datatmp);
+    node* cur_node = list.head;
+    if (d == 1) {
+        node* remove = list.head;
+        list.head->next->next->prev = list.head;
+        list.head = list.head->next;
+
+        delete remove;
+        return;
     }
+
+    node* pre_node = nullptr;
+
+    for (int i = 0; i < d - 1; i++) {
+        cur_node = cur_node->next;
+    }
+
+    cur_node->prev->next = cur_node->next;
+    cur_node->next->prev = cur_node->prev;
+
+    node* remove = cur_node;
+
+    delete remove;
 }
 
-bool search(Stack& s, char da) {
-    Stack tmp;
-    char datatmp;
+bool search(list& list, int ad) {
+    node* cur_node = list.head;
     bool flag = false;
-    int size = s.size;
-    for (int i = 0; i < size; i++) {
-        datatmp = s.pop();
-        tmp.push(datatmp);
-    }
-    for (int i = 0; i < size; i++) {
-        datatmp = tmp.pop();
-        s.push(datatmp);
-        if (datatmp == da) {
+
+    while (cur_node != nullptr) {
+        if (cur_node->data == ad) {
             flag = true;
         }
+        cur_node = cur_node->next;
+
     }
     return flag;
+
 }
 
-void saver(Stack& s) {
+void saver(list& list) {
     ofstream file1("C:\\Users\\MOkASiH\\Desktop\\sem_2\\11\\save.txt");
     if (file1) {
-        Stack tmp;
-        char datatmp;
-        int size = s.size;
-        for (int i = 0; i < size; i++) {
-            datatmp = s.pop();
-            tmp.push(datatmp);
-        }
-        for (int i = 0; i < size; i++) {
-            datatmp = tmp.pop();
-            s.push(datatmp);
-            file1 << datatmp;
+        node* cur_node = list.head;
+        while (cur_node != nullptr) {
+            file1 << cur_node->data;
+            cur_node = cur_node->next;
         }
     }
+    else {
+        cout << "Файл не открылся";
+    }
 
+}
+
+void killer(list& list) {
+    node* cur_node = list.head;
+    if (list.head == nullptr) {
+        return;
+    }
+    while (cur_node != nullptr) {
+        node* remove = cur_node;
+        list.head = cur_node->next;
+        cur_node = cur_node->next;
+        delete remove;
+    }
+}
+
+void load(list& list) {
+    ifstream file1("C:\\Users\\MOkASiH\\Desktop\\sem_2\\11\\save.txt");
+    string f;
+    cin.ignore();
+
+    if (file1) {
+        getline(file1, f);
+        for (int i = 0; i < f.length(); ++i) {
+            push(n, f[i], i);
+        }
+    }
     else {
         cout << "Файл не открылся";
     }
     file1.close();
 }
 
-void killer(Stack& s) {
-    int size = s.size;
-    for (int i = 0; i < size; i++) {
-        s.pop();
-    }
-}
-
-void load(Stack& s) {
-    ifstream file1("C:\\Users\\MOkASiH\\Desktop\\sem_2\\11\\save.txt");
-    if (file1) {
-        cin.ignore();
-        string f;
-        getline(file1, f);
-        for (int i = 0; i < f.length(); i++) {
-            s.push(f[i]);
-        }
-        file1.close();
-    }
-    else {
-        cout << "Файл не открыт";
-    }
-}
-
-
-
-
 int main() {
-    system("chcp 1251>null");
-    int p, d;
-    char ad;
+    setlocale(LC_ALL, "RU");
+
     string f;
-    cout << "Введите символы которыми хотите заполнить стек\n";
+    char ad;
     getline(cin, f);
-    for (int i = 0; i < f.length(); i++)
-    {
-        s.push(f[i]);
+    int d;
+    int p;
+
+    for (int i = 0; i < f.length(); ++i) {
+        push(n, f[i], i);
     }
 
-    cout << "Сформированный стек\n";
-    print(s);
 
-    cout << "\nВведите количество элементов которые хотите добавить\n";
+    cout << "Сформированная структура:\n";
+    print(n);
+
+    cout << "Введите количество элементов которые хотите добавить\n";
     cin >> d;
     cout << "Введите позицию на которую хотите добавить элементы\n";
     cin >> p;
@@ -173,38 +167,36 @@ int main() {
     cin.ignore();
     getline(cin, f);
     for (int i = 0; i < d; i++) {
-        add(s, f[i], p + i);
+        push(n, f[i], p + i);
     }
-    print(s);
+    print(n);
 
-    cout << "\nВведите количество элементов которые хотите удалить\n";
+
+    cout << "Введите количество элементов которые хотите удалить\n";
     cin >> d;
     cout << "Введите позицию с которой хотите удалить элементы\n";
     cin >> p;
     for (int i = 0; i < d; i++) {
-        del(s, p);
+        del(n, p);
     }
-    print(s);
+    print(n);
 
-
-    cout << "\nВведите элемент, поиск, которого необходимо выполнить\n";
+    cout << "Введите элемент, поиск, которого необходимо выполнить\n";
     cin >> ad;
-    if (search(s, ad) == 1) {
+    if (search(n, ad) == 1) {
         cout << "Данный элемент есть в структуре\n";
     }
     else {
         cout << "Данного элемента нет в структуре\n";
     }
 
-    saver(s);
+    saver(n);
     cout << "Структура сохранена в файл\n";
-    killer(s);
+    killer(n);
     cout << "Cтруктура удалена\n";
-    print(s);
+    print(n);
 
-    load(s);
+    load(n);
     cout << "Структура загружена из файла\n";
-    print(s);
-
-    return 0;
+    print(n);
 }
