@@ -199,4 +199,6 @@ int main() {
     load(n);
     cout << "Структура загружена из файла\n";
     print(n);
+
+    return 0;
 }
