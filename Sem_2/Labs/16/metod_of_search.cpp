@@ -57,7 +57,7 @@ void interpolation_searh(int* arr, int size, int key) {
 
 	int start = 0, end = size - 1;
 	int mid, found = -1;
-	while (start < end) {
+	while (arr[start] < key and arr[end] >= key) {
 		mid = start + ((key - arr[start]) * (end - start)) / (arr[end] - arr[start]);
 		if (arr[mid] == key) {
 			found = mid;
