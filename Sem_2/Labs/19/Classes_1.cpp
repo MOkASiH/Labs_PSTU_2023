@@ -1,10 +1,14 @@
-﻿#include<iostream>
+#include<iostream>
 #include<math.h>
 #include "classes1.h"
 
 using namespace std;
 
-
+Progression make_progression(double f, int s) {
+    Progression t;
+    t.init(f, s);
+    return t;
+}
 
 int main() {
     system("chcp 1251>null");
@@ -23,12 +27,9 @@ int main() {
     cout << "\nВведите целое число - номер элемента последовательности\n";
     cin >> c;
 
-    Progression progress;
-    progress.first = a;
-    progress.second = r;
-    progress.j = c;
-
-    result = progress.element();
+    Progression t = make_progression(a, r);
+    t.show();
+    result = t.element(c);
     cout << endl << c << " элемент последовательности = ";
     cout << result;
 
