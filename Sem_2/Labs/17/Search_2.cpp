@@ -31,7 +31,7 @@ void boyer_moore_search(string str, string pattern) {
         }
 
         if (i < 0) {
-            cout << "Ïàòòåðí íàéäåí íà ïîçèöèè " << shift + 1 << endl;
+            cout << "ÐŸÐ°Ñ‚Ñ‚ÐµÑ€Ð½ Ð½Ð°Ð¹Ð´ÐµÐ½ Ð½Ð° Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¸ " << shift + 1 << endl;
             if ((shift + pattern_size) < str_size) {
                 shift += pattern_size - shift_table[(int)str[shift + pattern_size]];
             }
@@ -81,7 +81,7 @@ void KMP(string str, string pattern) {
         }
 
         if (pattern_index == pattern_size) {
-            cout << "Ïàòòåðí íàéäåí íà ïîçèöèè " << str_index - pattern_index + 1 << endl;
+            cout << "ÐŸÐ°Ñ‚Ñ‚ÐµÑ€Ð½ Ð½Ð°Ð¹Ð´ÐµÐ½ Ð½Ð° Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¸ " << str_index - pattern_index + 1 << endl;
             pattern_index = lps[pattern_index - 1];
         }
         else if (str_index < str_size and pattern[pattern_index] != str[str_index])
@@ -102,16 +102,16 @@ int main() {
 
     string str, pattern;
 
-    cout << "Ââåäèòå ñòðîêó âíóòðè êîòîðîé íåîáõîäèìî âûïîëíèòü ïîèñê\n";
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð²Ð½ÑƒÑ‚Ñ€Ð¸ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð²Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ Ð¿Ð¾Ð¸ÑÐº\n";
     getline(cin, str);
 
-    cout << "Ââåäèòå èñêîìóþ ïîäñòðîêó: \n";
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸ÑÐºÐ¾Ð¼ÑƒÑŽ Ð¿Ð¾Ð´ÑÑ‚Ñ€Ð¾ÐºÑƒ: \n";
     getline(cin, pattern);
 
-    cout << "Ïîèñê àëãîðèòìîì Áîéåðà-Ìóðà: \n";
+    cout << "ÐŸÐ¾Ð¸ÑÐº Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð¾Ð¼ Ð‘Ð¾Ð¹ÐµÑ€Ð°-ÐœÑƒÑ€Ð°: \n";
     boyer_moore_search(str, pattern);
 
-    cout << "Ïîèñê àëãîðèòìîì Êíóòà-Ìîððèñà-Ïðàòòà: \n";
+    cout << "ÐŸÐ¾Ð¸ÑÐº Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð¾Ð¼ ÐšÐ½ÑƒÑ‚Ð°-ÐœÐ¾Ñ€Ñ€Ð¸ÑÐ°-ÐŸÑ€Ð°Ñ‚Ñ‚Ð°: \n";
     KMP(str, pattern);
 
     return 0;
