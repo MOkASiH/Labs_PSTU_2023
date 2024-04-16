@@ -29,14 +29,17 @@ Student& Student::operator=(const Student& s) {
 istream& operator >>(istream& in, Student& p) {
 	cout << "name: "; in >> p.name;
 	cout << "age: "; in >> p.age;
-	cout << "subject: "; in >> p.name;
-	cout << "mark: "; in >> p.age;
+	cout << "subject: "; in >> p.subject;
+	cout << "mark: "; in >> p.mark;
 	return in;
 }
 ostream& operator <<(ostream& out, const Student& p) {
 	out << "\nname: " << p.name;
 	out << "\nage: " << p.age <<" y.o.";
-	out << "\nsubject: " << p.name;
-	out << "\nmark: " << p.age;
+	out << "\nsubject: " << p.subject;
+	out << "\nmark: " << p.mark;
+	if (p.mark <= 2) {
+	out << "\nНа кол двоечника";
+	}
 	return out;
 }
