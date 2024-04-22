@@ -9,12 +9,12 @@ int value;
 
 void check_k(int k) {
 	if (k < 0) {
-		cout << "Íåâîçìîæíî ïðî÷åñòü ôàéë!\n";
+		cout << "ÐÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ Ð¿Ñ€Ð¾Ñ‡ÐµÑÑ‚ÑŒ Ñ„Ð°Ð¹Ð»!\n";
 	}
 }
 
 int make_file() {
-	cout << "Ââåäèòå íàçâàíèå ôàéëà: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð°: ";
 	cin >> f_name;
 	fstream stream(f_name, ios::out | ios::trunc);
 	if (!stream) {
@@ -22,7 +22,7 @@ int make_file() {
 	}
 	int n;
 	Pair m_Pair;
-	cout << "Ââåäèòå êîëè÷åñòâî ýëèìåíòîâ: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»Ð¸Ð¼ÐµÐ½Ñ‚Ð¾Ð²: ";
 	cin >> n;
 	for (int i = 0; i < n; i++) {
 		cin >> m_Pair;
@@ -33,7 +33,7 @@ int make_file() {
 }
 
 int print_file() {
-	cout << "Ââåäèòå íàçâàíèå ôàéëà: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð°: ";
 	cin >> f_name;
 	fstream stream(f_name, ios::in);
 	if (!stream) {
@@ -46,16 +46,16 @@ int print_file() {
 		i++;
 	}
 	if (i == 0) {
-		cout << "Ôàéë ïóñò!\n";
+		cout << "Ð¤Ð°Ð¹Ð» Ð¿ÑƒÑÑ‚!\n";
 	}
 	stream.close();
 	return i;
 }
 
 int del_file() {
-	cout << "Ââåäèòå íàçâàíèå ôàéëà: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð°: ";
 	cin >> f_name;
-	cout << "Ââåäèòå çíà÷åíèå: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ: ";
 	cin >> value;
 	fstream temp("temp", ios::out);
 	fstream stream(f_name, ios::in);
@@ -82,11 +82,11 @@ int del_file() {
 
 int add_file() {
 	int number;
-	cout << "Ââåäèòå íàçâàíèå ôàéëà: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð°: ";
 	cin >> f_name;
-	cout << "Ââåäèòå íîìåð: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€: ";
 	cin >> number;
-	cout << "Ââåäèòå êîëè÷åñòâî çàïèñåé: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð·Ð°Ð¿Ð¸ÑÐµÐ¹: ";
 	cin >> value;
 	fstream temp("temp", ios::out);
 	fstream stream(f_name, ios::in);
@@ -123,9 +123,9 @@ int add_file() {
 }
 
 int change_file() {
-	cout << "Ââåäèòå íàçâàíèå ôàéëà: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð°: ";
 	cin >> f_name;
-	cout << "Ââåäèòå çíà÷åíèå: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ: ";
 	cin >> value;
 	fstream temp("temp", ios::out);
 	fstream stream(f_name, ios::in);
