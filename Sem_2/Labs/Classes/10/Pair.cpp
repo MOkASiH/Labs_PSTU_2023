@@ -5,7 +5,7 @@ Pair::Pair(int first, double second) {
 	this->second = second;
 }
 istream& operator>>(istream& in, Pair& m_pair) {
-	cout << "Ââåäèòå äàííûå â ôîğìàòå:\nöåëîå ÷èñëî âåùåñòâåííîå ÷èñëî\n";
+	cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ´Ğ°Ğ½Ğ½Ñ‹Ğµ Ğ² Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ‚Ğµ:\nÑ†ĞµĞ»Ğ¾Ğµ Ñ‡Ğ¸ÑĞ»Ğ¾ Ğ²ĞµÑ‰ĞµÑÑ‚Ğ²ĞµĞ½Ğ½Ğ¾Ğµ Ñ‡Ğ¸ÑĞ»Ğ¾\n";
 	in >> m_pair.first;
 	in >> m_pair.second;
 	return in;
