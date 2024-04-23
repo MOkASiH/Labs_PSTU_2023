@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-using namespace std;
 #include <fstream>
+using namespace std;
 
 class Pair {
 	int first;

@@ -1,7 +1,6 @@
 #pragma once
 #include "Pair.h"
 #include <iostream>
-using namespace std;
 
 char f_name[30];
 

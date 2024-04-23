@@ -1,9 +1,9 @@
 ﻿#include<iostream>
-using namespace std;
-#include "file_work.h"
-using namespace std;
 #include <string>
 #include <functional>
+#include "file_work.h"
+
+using namespace std;
 
 int main() {
 	system("chcp 1251 > NULL");
