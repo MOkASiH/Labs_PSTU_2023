@@ -11,11 +11,12 @@ public:
 	Pair(const Pair&);
 	~Pair();
 	void set_first(int);
-	void set_double(double);
-	int get_first();
-	double get_double();
+	void set_second(double);
+	int get_first() const;
+	double get_second() const;
 	Pair& operator+(const Pair&);
 	friend ostream& operator<<(ostream& out, const Pair& p);
 	friend istream& operator>>(istream& in, Pair& p);
+	friend bool operator<(const Pair&, const Pair&);
 };
 
