@@ -42,13 +42,13 @@ void MainWindow::Print_tree(tnode* root){
        {
            Print_tree(root->left);
 
-           QString node = QString("%1").arg(root->data);
-           QGraphicsEllipseItem *ellipse = scene->addEllipse(root->x, root->y, 46, 46, QPen(Qt::black), QBrush(Qt::lightGray));
-           QGraphicsTextItem *textItem = scene->addText(node);
+           QString node = QString("%1").arg(root->data); //значние элемента узла
+           QGraphicsEllipseItem *ellipse = scene->addEllipse(root->x, root->y, 46, 46, QPen(Qt::black), QBrush(Qt::lightGray)); // кружок 
+           QGraphicsTextItem *textItem = scene->addText(node); 
            textItem->setPos(ellipse->boundingRect().center().x() - textItem->boundingRect().width() / 2,
                             ellipse->boundingRect().center().y() - textItem->boundingRect().height() / 2);
 
-           if (root->left != nullptr)
+           if (root->left != nullptr) 
            {
                int leftX = root->left->x;
                int leftY = root->left->y;
@@ -56,11 +56,11 @@ void MainWindow::Print_tree(tnode* root){
                int currentNodeX = root->x;
                int currentNodeY = root->y;
 
-               QPointF leftCenter(leftX + 23, leftY + 23);
-               QPointF currentNodeCenter(currentNodeX + 23, currentNodeY + 23);
+               QPointF leftCenter(leftX + 23, leftY + 23);//центр левого узла
+               QPointF currentNodeCenter(currentNodeX + 23, currentNodeY + 23); //центр текущего узла
 
-               scene->addLine(leftCenter.x(), leftCenter.y(), currentNodeCenter.x(), currentNodeCenter.y(), QPen(Qt::black));
-               if(root->right != 0){
+               scene->addLine(leftCenter.x(), leftCenter.y(), currentNodeCenter.x(), currentNodeCenter.y(), QPen(Qt::black)); //линия между узлами 
+               if(root->right != 0){ 
                    int rightX = root->right->x;
                    int rightY = root->right->y;
                    int currentNodeX = root->x;
@@ -101,7 +101,7 @@ void MainWindow::Print_Binary(){
     ui->graphicsView->update();
 }
 
-void MainWindow::Print_Average(){
+void MainWindow::Print_Average(){ // вывод среднего значение элементов дерева
     double a = tree.Average();
     QString node = QString("%1").arg(a);
     QString av = QString("Среднее значение элементов");
