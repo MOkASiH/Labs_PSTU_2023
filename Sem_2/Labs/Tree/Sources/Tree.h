@@ -30,6 +30,7 @@ public:
     void Destroy_tree(tnode*);
     tnode* Balanced_tree(int, tnode*, int x, int y, int h);
     void set_count(int);
+    void set_root(tnode*);
 };
 
 #endif // TREE_H

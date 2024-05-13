@@ -28,13 +28,14 @@ MainWindow::~MainWindow()
 void MainWindow::Forming_tree(){
     int cnt_nodes = (ui->Count_nodes->text()).toInt();
     if (cnt_nodes < 2){
-        qDebug() << "Count nodes must be more than 1";
+        qDebug() << "Количество узлов должно быть больше единицы";
         return;
     }
     tree.Create_tree(cnt_nodes);
     scene->clear();
     tnode* root = tree.get_root();
     Print_tree(root);
+    ui->graphicsView->update();
 }
 void MainWindow::Print_tree(tnode* root){
     if (root != nullptr)
@@ -95,7 +96,9 @@ void MainWindow::Print_Binary(){
     tree.Destroy_tree(r);
     r = tree.Balanced_tree(n, r, 640, 10, 250);
     tree.set_count(n);
+    tree.set_root(r);
     Print_tree(r);
+    ui->graphicsView->update();
 }
 
 void MainWindow::Print_Average(){

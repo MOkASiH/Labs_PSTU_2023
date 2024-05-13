@@ -8,6 +8,7 @@ tnode* Tree::Add_node(double d, tnode* tree, int x, int y, int h) {
         tree->x = x;
         tree->y = y;
         tree->num = ++count;
+        if (root == nullptr) root = tree;
         sum += d;
     }
     else if (tree->data > d) {
@@ -30,7 +31,7 @@ void Tree::Create_tree(int cnt) {
         double d2 = (rand() % 100 + 1);
         double r = d / d2;
         vector.push_back(r);
-        root = Add_node(r, root, 640, 10, 250);
+        Add_node(r, root, 640, 10, 250);
     }
 }
 tnode* Tree::get_root(){
@@ -66,4 +67,6 @@ int Tree::get_count(){
 void Tree::set_count(int c){
     count = c;
 }
-
+void Tree::set_root(tnode* r){
+    root = r;
+}
