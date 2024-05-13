@@ -24,7 +24,7 @@ double Tree::Average() {
     return sum / count;
 }
 
-void Tree::Create_tree(int cnt) {
+void Tree::Create_tree(int cnt) { // создание дерева поиска
     srand(time(0));
     for (int i = 0; i < cnt; i++) {
         double d = (rand() % 1000 + 1);
@@ -38,12 +38,12 @@ tnode* Tree::get_root(){
     return root;
 }
 
-void Tree::Destroy_tree(tnode*tree){
+void Tree::Destroy_tree(tnode*tree){ 
     if (tree->left != nullptr)   Destroy_tree(tree->left);
       if (tree->right != nullptr)  Destroy_tree(tree->right);
       delete tree;
 }
-tnode* Tree::Balanced_tree(int n, tnode* r, int x, int y, int h){
+tnode* Tree::Balanced_tree(int n, tnode* r, int x, int y, int h){ //преобразование в идеально сбалансированное
     tnode* new_root;
     int nl, nr;
     if(n == 0){
