@@ -563,3 +563,5 @@ int main(int argc, char *argv[])
 ![](https://github.com/MOkASiH/Labs_PSTU_2023/blob/main/Sem_2/Labs/Graph/Image/UML.png?raw=true)
 
 # 3 Демонстрация работы
+
+https://youtu.be/5Za381dITp4
