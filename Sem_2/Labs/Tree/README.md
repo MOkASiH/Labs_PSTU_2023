@@ -294,7 +294,7 @@ int main(int argc, char *argv[])
 
 # 2.2 UML
 
-<image src="image/UML.png">
+![](https://github.com/MOkASiH/Labs_PSTU_2023/blob/main/Sem_2/Labs/Tree/Image/UML.png?raw=true)
 
 # 3 Демонстрация работы
 
