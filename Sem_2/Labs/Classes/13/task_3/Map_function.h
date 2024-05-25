@@ -4,6 +4,7 @@
 #include <list>
 #include <numeric>
 #include <algorithm>
+#include "Pair.h"
 
 
 using namespace std;
